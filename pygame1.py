@@ -139,6 +139,7 @@ def game_loop():
     x =  (display_width * 0.45)
     y = (display_height * 0.8)
     x_change = 0
+    y_change = 0
     thing_startx= random.randrange(0,display_width)
     thing_starty= -600
     thing_speed= 7
@@ -158,18 +159,25 @@ def game_loop():
                     x_change = -20
                 elif event.key == pygame.K_RIGHT:
                     x_change = 20
+                elif event.key == pygame.K_UP :
+                    y_change = -10
+                elif event.key == pygame.K_DOWN :
+                    y_change = 10
                 if event.key == pygame.K_p:
                     pause = True #not working if pause isn't a global variable
                     paused()
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     x_change = 0
+                if event.key == pygame.K_UP or event.key == pygame.K_DOWN :
+                    y_change = 0
 
         if Highscore < dodged :
             Highscore = dodged
         x=x+x_change
+        y=y+y_change
         gameDisplay.fill(white)
-        print Highscore
+        #print Highscore
         things(thing_startx, thing_starty, thing_width, thing_height, blue)
         thing_starty += thing_speed
         things_dodged(dodged)
